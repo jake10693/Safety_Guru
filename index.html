@@ -5,64 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/app.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <title>Safety Guru</title>
 </head>
 
-<header>
-    <div class="panel">
-        <h1 id="head">Safety Guru</h1>
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            
+            <h1 id="head" class="title">Safety Guru</h1>
+            <h2 id="head2" class="subtitle">Where you can find affordable and safe vehicles for you and your family!</h2>
+        </div>
     </div>
-</header>
+</section>
 
 <main>
-    <div class="row">
 
-        <div class="small-6 columns">
-            <label>Select year</label>
-            <select id="year">
-                <option value="1">one</option>
-                <option value="2">two</option>
-                <option value="3">three</option>
-                <option value="4">four</option>
-            </select>
-        </div>
+    
+                                            
+    <select id="year">
+        <option value="1">year</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+        <option value="4">four</option>
+    </select>
+    
 
-        <div class="small-6 columns">
-            <label>Select make</label>
-            <select id="make">
-                <option value="1">one</option>
-                <option value="2">two</option>
-                <option value="3">three</option>
-                <option value="4">four</option>
-            </select>
-        </div>
 
-        <div class="small-6 columns">
-            <label>Select model</label>
-            <select id="model">
-                <option value="1">one</option>
-                <option value="2">two</option>
-                <option value="3">three</option>
-                <option value="4">four</option>
-            </select>
-        </div>
+    
+    <select id="make">
+        <option value="1">make</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+        <option value="4">four</option>
+    </select>
 
-    </div>
 
+    
+    <select id="model">
+        <option value="1">model</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+        <option value="4">four</option>
+    </select>
+                   
+            
+
+         
 </main>
 
 <h2 id="car-searched"></h2>
 
 
-<button id="search-btn">Search</button>
+<input type="submit" id="search-btn" ></input>
 <p id="data-div"></p>
 
 
-
+<script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="./assets/js/app.js"></script>
-<script src="./assets/js/app.js.map"></script>
 <script src="./Assets/js/kbb.js"></script>
 <script src="./Assets/js/NHTSA.js"></script>
 </body>
