@@ -5,8 +5,7 @@ $("#search-btn").on("click", function (event) {
     var make = 'toyota';
     var model = 'corolla';
 
-    var recallQuery = "https://webapi.nhtsa.gov/api/Recalls/vehicle/modelyear/" + year + "/make/" + make + "/model/" + model + "?format=json";
-
+    var recallQuery = "https://cors-anywhere.herokuapp.com/https://webapi.nhtsa.gov/api/Recalls/vehicle/modelyear/" + year + "/make/" + make + "/model/" + model + "?format=json";
 
     $.ajax({
         url: recallQuery,
@@ -41,12 +40,3 @@ $("#search-btn").on("click", function (event) {
     });
 
 });
-
-
-
-fetch('https://cors-anywhere.herokuapp.com/one.nhtsa.gov/webapi/api/Recalls/vehicle/modelyear/2000/make/saturn/model/LS?format=json', {
-  headers: {
-    'Access-Control-Allow-Origin':'*'
-  }
-})
-  .then(response => console.log(response)) 
