@@ -42,4 +42,25 @@ body {
     width: 31%;
     float: left;
 }
+.section {
+    width: 80%;
+    margin: 30px auto;
+}
 
+.tabed-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem;
+    padding: 20px;
+}
+
+.tabed-section h5 {
+    font-weight: 700;
+}
+
+.tabed-section p {
+    font-size: 1rem;
+}
+
+.hide {
+    display: none;
+}

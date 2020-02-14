@@ -13,11 +13,11 @@ $(document).ready(
          //Optional: initialize the year, make, model, and trim drop downs by providing their element IDs
          carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
          //Optional: set the onclick event for a button to show car data.
-         $('#search-btn').click(  function(){ carquery.populateCarData('car-model-data'); } );
+         //$('#search-btn').click(  function(){ carquery.populateCarData('car-model-data'); } );
          //Optional: initialize the make, model, trim lists by providing their element IDs.
          carquery.initMakeModelTrimList('make-list', 'model-list', 'trim-list', 'trim-data-list');
          //Optional: set minimum and/or maximum year options.
-         carquery.year_select_min=1943  ;
+         carquery.year_select_min=1943;
          carquery.year_select_max=2019;
      
          //Optional: initialize search interface elements.
