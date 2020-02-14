@@ -1,3 +1,4 @@
+//TAB CONTROL
 $(".tab").on("click", function () {
     const idNum = $(this).attr("id");
     const setId = '#' + idNum;
@@ -13,17 +14,22 @@ $(".tab").on("click", function () {
 
 
 $("#search-btn").on("click", function (event) {
-
     event.preventDefault();
+    getSafety();
+    getRecall();
+});
 
+
+function getSafety() {
     var year = $('#car-years').val();
     var make = $('#car-makes').val();
     var model = $('#car-models').val();
 
-    var recallQuery = "https://cors-anywhere.herokuapp.com/https://webapi.nhtsa.gov/api/Recalls/vehicle/modelyear/" + year + "/make/" + make + "/model/" + model + "?format=json";
+    const vehId = 7523;
+    const safetyQuery = "https://cors-anywhere.herokuapp.com/https://one.nhtsa.gov/webapi/api/SafetyRatings/VehicleId/" + vehId + "?format=json";
 
     $.ajax({
-        url: recallQuery,
+        url: safetyQuery,
         type: 'GET',
         beforeSend: loading(),
 
@@ -31,41 +37,55 @@ $("#search-btn").on("click", function (event) {
 
             $("#safety-div").empty();
 
-            var recallCount = response.Results.length;
+            var safetyCount = response.Results.Count;
 
-            if (recallCount === 0) {
-                $('#safety-div').append($('<h5>').text('No Data Available'));
+            if (safetyCount === 0) {
+                $('#safety-div').append($('<h5>').text('No safety data available for this vehicle'));
             } else {
-                for (i = 0; i < recallCount; i++) {
-                    const title = response.Results[i].Component;
-                    const summary = response.Results[i].Summary;
-                    const recallNum = response.Results[i].NHTSACampaignNumber;
-                    const t = $('<h5>').text(title)
-                    const s = $('<p>').text(summary)
-                    const r = $('<p>').text('NHTSA CAMPAIGN NUMBER: ' + recallNum)
-                    const b = $('<br>')
-                    $('#safety-div').append(t);
-                    $('#safety-div').append(s);
-                    $('#safety-div').append(r);
-                    $('#safety-div').append(b);
-                }
+                const overallRating = response.Results[0].OverallRating;
+                const overallFrontCrashRating = response.Results[0].OverallFrontCrashRating;
+                const frontCrashDriversideRating = response.Results[0].FrontCrashDriversideRating;
+                const frontCrashPassengersideRating = response.Results[0].FrontCrashPassengersideRating;
+                const overallSideCrashRating = response.Results[0].OverallSideCrashRating;
+                const sideCrashDriversideRating = response.Results[0].SideCrashDriversideRating;
+                const sideCrashPassengersideRating = response.Results[0].SideCrashPassengersideRating;
+                const rolloverRating = response.Results[0].RolloverRating;
+                const sidePoleCrashRating = response.Results[0].SidePoleCrashRating;
+                const nhtsaElectronicStabilityControl = response.Results[0].NHTSAElectronicStabilityControl;
+                const nhtsaForwardCollisionWarning = response.Results[0].NHTSAElectronicStabilityControl;
+                const nhtsaLaneDepartureWarning = response.Results[0].NHTSALaneDepartureWarning;
+
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Overall Rating: </span>' + '<span class="safety-desc">' + overallRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Overall Front Crash Rating: </span>' + '<span class="safety-desc">' + overallFrontCrashRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Drivers Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashDriversideRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Passenger Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashPassengersideRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Overall Side Crash Rating: </span>' + '<span class="safety-desc">' + overallSideCrashRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Drivers Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashDriversideRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Passenger Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashPassengersideRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Rollover Rating: </span>' + '<span class="safety-desc">' + rolloverRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Side Pole Crash Rating: </span>' + '<span class="safety-desc">' + sidePoleCrashRating + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Electronic Stability Control: </span>' + '<span class="safety-desc">' + nhtsaElectronicStabilityControl + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Forward Collision Warning: </span>' + '<span class="safety-desc">' + nhtsaForwardCollisionWarning + '</span></div>');
+                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Lane Departure Warning: </span>' + '<span class="safety-desc">' + nhtsaLaneDepartureWarning + '</span></div>');
+
+
             }
         },
 
         error: function () {
-            alert('Unable to get NHTSA data!');
+            alert('ERROR! Unable to get NCAP safety data!');
         }
 
     });
-    getRecall();
-});
+}
+
 
 function getRecall() {
     var year = $('#car-years').val();
     var make = $('#car-makes').val();
     var model = $('#car-models').val();
 
-    var recallQuery = "https://cors-anywhere.herokuapp.com/https://webapi.nhtsa.gov/api/Recalls/vehicle/modelyear/" + year + "/make/" + make + "/model/" + model + "?format=json";
+    const recallQuery = "https://cors-anywhere.herokuapp.com/https://webapi.nhtsa.gov/api/Recalls/vehicle/modelyear/" + year + "/make/" + make + "/model/" + model + "?format=json";
 
     $.ajax({
         url: recallQuery,
@@ -78,7 +98,7 @@ function getRecall() {
             var recallCount = response.Results.length;
 
             if (recallCount === 0) {
-                $('#recall-div').append($('<h5>').text('No Data Available'));
+                $('#recall-div').append($('<h5>').text('No recall data available for this vehicle'));
             } else {
                 for (i = 0; i < recallCount; i++) {
                     const title = response.Results[i].Component;
@@ -97,10 +117,11 @@ function getRecall() {
         },
 
         error: function () {
-            alert('Unable to get NHTSA data!');
+            alert('ERROR! Unable to get NHTSA recall data!');
         }
     });
 }
+
 
 function loading() {
     $("#safety-div").empty();

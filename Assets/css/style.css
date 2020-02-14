@@ -48,7 +48,7 @@ body {
 }
 
 .tabed-section {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.78);
     font-size: 1.25rem;
     padding: 20px;
 }
@@ -63,4 +63,17 @@ body {
 
 .hide {
     display: none;
+}
+
+.rating-row {
+    
+}
+
+.safety-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.safety-desc {
+    font-size: 1.25rem;
 }
