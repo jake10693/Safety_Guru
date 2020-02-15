@@ -14,6 +14,7 @@ $(".tab").on("click", function () {
 
 $("#search-btn").on("click", function (event) {
     event.preventDefault();
+    getPhoto();
     getVehinfo();
     getRecall();
 });
@@ -24,7 +25,6 @@ function getVehinfo() {
     var make = $('#car-makes').val();
     var model = $('#car-models').val();
 
-
     const idLink = "https://cors-anywhere.herokuapp.com/https://one.nhtsa.gov/webapi/api/SafetyRatings/modelyear/" + year + "/make/" + make + "/model/" + model + "?format=json"
 
     $.ajax({
@@ -32,8 +32,17 @@ function getVehinfo() {
         type: 'GET',
 
         success: function (response) {
-            const vehId = response.Results[0].VehicleId;
-            getSafety(vehId);
+
+            $("#safety-div").empty();
+
+            var resultCount = response.Results.length;
+
+            if (resultCount === 0) {
+                $('#safety-div').append($('<h5>').text('No safety data available for this vehicle'));
+            } else {
+                const vehId = response.Results[0].VehicleId;
+                getSafety(vehId);
+            }
         }
     });
 }
@@ -56,40 +65,37 @@ function getSafety(value) {
 
             $("#safety-div").empty();
 
-            var safetyCount = response.Results.Count;
+            const overallRating = response.Results[0].OverallRating;
+            const overallFrontCrashRating = response.Results[0].OverallFrontCrashRating;
+            const frontCrashDriversideRating = response.Results[0].FrontCrashDriversideRating;
+            const frontCrashPassengersideRating = response.Results[0].FrontCrashPassengersideRating;
+            const overallSideCrashRating = response.Results[0].OverallSideCrashRating;
+            const sideCrashDriversideRating = response.Results[0].SideCrashDriversideRating;
+            const sideCrashPassengersideRating = response.Results[0].SideCrashPassengersideRating;
+            const rolloverRating = response.Results[0].RolloverRating;
+            const sidePoleCrashRating = response.Results[0].SidePoleCrashRating;
+            const nhtsaElectronicStabilityControl = response.Results[0].NHTSAElectronicStabilityControl;
+            const nhtsaForwardCollisionWarning = response.Results[0].NHTSAElectronicStabilityControl;
+            const nhtsaLaneDepartureWarning = response.Results[0].NHTSALaneDepartureWarning;
 
-            if (safetyCount === 0) {
-                $('#safety-div').append($('<h5>').text('No safety data available for this vehicle'));
-            } else {
-                const overallRating = response.Results[0].OverallRating;
-                const overallFrontCrashRating = response.Results[0].OverallFrontCrashRating;
-                const frontCrashDriversideRating = response.Results[0].FrontCrashDriversideRating;
-                const frontCrashPassengersideRating = response.Results[0].FrontCrashPassengersideRating;
-                const overallSideCrashRating = response.Results[0].OverallSideCrashRating;
-                const sideCrashDriversideRating = response.Results[0].SideCrashDriversideRating;
-                const sideCrashPassengersideRating = response.Results[0].SideCrashPassengersideRating;
-                const rolloverRating = response.Results[0].RolloverRating;
-                const sidePoleCrashRating = response.Results[0].SidePoleCrashRating;
-                const nhtsaElectronicStabilityControl = response.Results[0].NHTSAElectronicStabilityControl;
-                const nhtsaForwardCollisionWarning = response.Results[0].NHTSAElectronicStabilityControl;
-                const nhtsaLaneDepartureWarning = response.Results[0].NHTSALaneDepartureWarning;
+            $('#safety-div').append($('<div>').attr('id', 'left-safety'));
+            $('#safety-div').append($('<div>').attr('id', 'right-safety'));
 
-                $('#safety-div').append($('<div>').attr('id', 'left-safety'));
-                $('#safety-div').append($('<div>').attr('id', 'right-safety'));
+            console.log(overallRating)
 
-                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Rating: </span>' + '<span class="safety-desc">' + overallRating + '</span></div>');
-                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Front Crash Rating: </span>' + '<span class="safety-desc">' + overallFrontCrashRating + '</span></div>');
-                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashDriversideRating + '</span></div>');
-                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Passenger Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashPassengersideRating + '</span></div>');
-                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Side Crash Rating: </span>' + '<span class="safety-desc">' + overallSideCrashRating + '</span></div>');
-                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashDriversideRating + '</span></div>');
-                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Passenger Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashPassengersideRating + '</span></div>');
-                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Rollover Rating: </span>' + '<span class="safety-desc">' + rolloverRating + '</span></div>');
-                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Side Pole Crash Rating: </span>' + '<span class="safety-desc">' + sidePoleCrashRating + '</span></div>');
-                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Electronic Stability Control: </span>' + '<span class="safety-desc">' + nhtsaElectronicStabilityControl + '</span></div>');
-                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Forward Collision Warning: </span>' + '<span class="safety-desc">' + nhtsaForwardCollisionWarning + '</span></div>');
-                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Lane Departure Warning: </span>' + '<span class="safety-desc">' + nhtsaLaneDepartureWarning + '</span></div>');
-            }
+            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Rating: </span>' + '<span class="safety-desc">' + overallRating + '</span></div>');
+            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Front Crash Rating: </span>' + '<span class="safety-desc">' + overallFrontCrashRating + '</span></div>');
+            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashDriversideRating + '</span></div>');
+            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Passenger Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashPassengersideRating + '</span></div>');
+            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Side Crash Rating: </span>' + '<span class="safety-desc">' + overallSideCrashRating + '</span></div>');
+            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashDriversideRating + '</span></div>');
+            $('#right-safety').append('<div class="rating-row"><span class="safety-title">Passenger Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashPassengersideRating + '</span></div>');
+            $('#right-safety').append('<div class="rating-row"><span class="safety-title">Rollover Rating: </span>' + '<span class="safety-desc">' + rolloverRating + '</span></div>');
+            $('#right-safety').append('<div class="rating-row"><span class="safety-title">Side Pole Crash Rating: </span>' + '<span class="safety-desc">' + sidePoleCrashRating + '</span></div>');
+            $('#right-safety').append('<div class="rating-row"><span class="safety-title">Electronic Stability Control: </span>' + '<span class="safety-desc">' + nhtsaElectronicStabilityControl + '</span></div>');
+            $('#right-safety').append('<div class="rating-row"><span class="safety-title">Forward Collision Warning: </span>' + '<span class="safety-desc">' + nhtsaForwardCollisionWarning + '</span></div>');
+            $('#right-safety').append('<div class="rating-row"><span class="safety-title">Lane Departure Warning: </span>' + '<span class="safety-desc">' + nhtsaLaneDepartureWarning + '</span></div>');
+
         },
 
         error: function () {
