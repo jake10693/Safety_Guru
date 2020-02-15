@@ -1,10 +1,33 @@
 body { 
-    background: url(https://images.unsplash.com/photo-1471958680802-1345a694ba6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=60) center fixed; 
+    background: url(https://images.unsplash.com/photo-1471958680802-1345a694ba6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=60) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-position: fixed;
     min-height: 100vh;
+  }
+.title {
+      text-decoration-color: 
+  }
+#block1 {
+    background-color: rgba(29, 28, 131, .80);;
+  }
+#block2 {
+    background-color: rgba(209, 245, 4, 0.70);;
+  }
+#block3 {
+    background-color: rgba(144, 0, 173, 0.85);;
+  }
+#block4 {
+    background-color: rgba(105, 27, 27, 0.85);;
+  }
+#block5 {
+    background-color: rgba(53, 134, 80, 0.85);;
+  }
+
+  table {
+      margin: auto;
   }
 
 .hero {
@@ -42,14 +65,13 @@ body {
     float: left;
 }
 
-/* STYLING FOR TABBED CONTROL */
 .section {
     width: 80%;
     margin: 30px auto;
 }
 
 .tabed-section {
-    background-color: rgba(255, 255, 255, 0.78);
+    /* background-color: rgba(255, 255, 255, 0.7); */
     font-size: 1.25rem;
     padding: 20px;
 }

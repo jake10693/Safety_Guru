@@ -22,26 +22,106 @@
 </section>
 
 <main>
-    <div class="selection-menu section">
-        <select name="car-years" id="car-years"></select>
-        <select name="car-makes" id="car-makes"></select>
-        <select name="car-models" id="car-models"></select>
-        <button id="search-btn">Search</button>
-    </div>
+    
+        <div class="columns">
 
-    <div class="tabed-section section">
-        <div class="tabs is-medium">
-            <ul>
-                <li class="tab is-active" id="safety"><a>Crash Ratings</a></li>
-                <li class="tab" id="recall"><a>Recalls</a></li>
-                <li class="tab" id="tsb"><a>TSB</a></li>
-            </ul>
+        <div class="column-">
+            <div class="selection-menu section">
+             <select name="car-years" id="car-years"></select>
+             <select name="car-makes" id="car-makes"></select>
+             <select name="car-models" id="car-models"></select>
+             <button id="search-btn">Search</button>
+            </div>
         </div>
 
-        <div id="safety-div" class="tab-content"></div>
-        <div id="recall-div" class="tab-content hide"></div>
-        <div id="tsb-div" class="tab-content hide"></div>
-    </div>
+    <!-- <table>
+        <tr>
+            <td valign="top">
+                <div id="make-list" />
+            </td>
+            <td valign="top">
+                <div id="model-list" />
+            </td>
+            <td valign="top">
+                <div id="trim-list" />
+            </td>
+        </tr>
+    
+    </table> -->
+
+    <!-- <div class="tabed-section section">
+        <div class="tabs is-medium">
+            <ul>
+                <li class=""><a>Saftey Data</a></li>
+                <li class="is-active"><a>Recalls</a></li>
+                <li class=""><a>TSB's</a></li>
+            </ul>
+        </div>
+    
+        <div id="safety-div"></div>
+        <div id="recall-div"></div>
+        <div id="tsb-div">TSB INFORMATION</div>
+    </div> -->
+    <div class="column">
+    <div class="container is-widescreen">
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-8">
+              <div class="tile">
+                <div class="tile is-parent is-vertical">
+                  <article class="tile is-child notification is-primary" id="block1">
+                    <p class="title">Dealer/New</p>
+                    <p class="subtitle">Average expected cost for a new model</p>
+                    <p></p>
+                  </article>
+                  <article class="tile is-child notification is-warning" id="block2">
+                    <p class="title">Dealer/Used</p>
+                    <p class="subtitle">Average expected cost for a used model</p>
+                    <p></p>
+                  </article>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child notification is-info" id="block3">
+                    <p class="title">Middle tile</p>
+                    <p class="subtitle">With an image</p>
+                    <figure class="image is-4by3">
+                      <img src="https://bulma.io/images/placeholders/640x480.png">
+                    </figure>
+                  </article>
+                </div>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-danger" id="block4">
+                  <p class="title">Private Party</p>
+                  <p class="subtitle">Average expected cost if purchased from private party</p>
+                  <p></p>
+                  <div class="content">
+                    <!-- Content -->
+                    <div class="tabed-section section">
+                        <div class="tabs is-medium">
+                            <ul>
+                                <li class=""><a>Saftey Data</a></li>
+                                <li class="is-active"><a>Recalls</a></li>
+                                <li class=""><a>TSB's</a></li>
+                            </ul>
+                        </div>
+                    
+                        <div id="safety-div"></div>
+                        <div id="recall-div"></div>
+                        <div id="tsb-div">TSB INFORMATION</div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+           
+                
+              </article>
+            </div>
+          </div>
+        
+        </div>
+        </div>
+        </div>
 </main>
 
 <!-- <h2 id="car-searched"></h2>
@@ -66,10 +146,11 @@
 
 </table> -->
 
+
 <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
 <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="./Assets/js/c-img.js"></script>
+<script src="./Assets/js/kbb.js"></script>
 <script src="./Assets/js/NHTSA.js"></script>
 <script src="./Assets/js/cq.js"></script>
 
