@@ -12,21 +12,40 @@ $(".tab").on("click", function () {
 
 });
 
-
 $("#search-btn").on("click", function (event) {
     event.preventDefault();
-    getSafety();
+    getVehinfo();
     getRecall();
 });
 
-
-function getSafety() {
+//PARSE DATA & RETURN VEHICLE ID
+function getVehinfo() {
     var year = $('#car-years').val();
     var make = $('#car-makes').val();
     var model = $('#car-models').val();
 
-    const vehId = 7523;
-    const safetyQuery = "https://cors-anywhere.herokuapp.com/https://one.nhtsa.gov/webapi/api/SafetyRatings/VehicleId/" + vehId + "?format=json";
+
+    const idLink = "https://cors-anywhere.herokuapp.com/https://one.nhtsa.gov/webapi/api/SafetyRatings/modelyear/" + year + "/make/" + make + "/model/" + model + "?format=json"
+
+    $.ajax({
+        url: idLink,
+        type: 'GET',
+
+        success: function (response) {
+            const vehId = response.Results[0].VehicleId;
+            getSafety(vehId);
+        }
+    });
+}
+
+//USING ID LOOKUP CRASH TEST DATA
+function getSafety(value) {
+    var year = $('#car-years').val();
+    var make = $('#car-makes').val();
+    var model = $('#car-models').val();
+
+
+    const safetyQuery = "https://cors-anywhere.herokuapp.com/https://one.nhtsa.gov/webapi/api/SafetyRatings/VehicleId/" + value + "?format=json";
 
     $.ajax({
         url: safetyQuery,
@@ -55,20 +74,21 @@ function getSafety() {
                 const nhtsaForwardCollisionWarning = response.Results[0].NHTSAElectronicStabilityControl;
                 const nhtsaLaneDepartureWarning = response.Results[0].NHTSALaneDepartureWarning;
 
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Overall Rating: </span>' + '<span class="safety-desc">' + overallRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Overall Front Crash Rating: </span>' + '<span class="safety-desc">' + overallFrontCrashRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Drivers Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashDriversideRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Passenger Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashPassengersideRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Overall Side Crash Rating: </span>' + '<span class="safety-desc">' + overallSideCrashRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Drivers Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashDriversideRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Passenger Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashPassengersideRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Rollover Rating: </span>' + '<span class="safety-desc">' + rolloverRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Side Pole Crash Rating: </span>' + '<span class="safety-desc">' + sidePoleCrashRating + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Electronic Stability Control: </span>' + '<span class="safety-desc">' + nhtsaElectronicStabilityControl + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Forward Collision Warning: </span>' + '<span class="safety-desc">' + nhtsaForwardCollisionWarning + '</span></div>');
-                $('#safety-div').append('<div class="rating-row"><span class="safety-title">Lane Departure Warning: </span>' + '<span class="safety-desc">' + nhtsaLaneDepartureWarning + '</span></div>');
+                $('#safety-div').append($('<div>').attr('id', 'left-safety'));
+                $('#safety-div').append($('<div>').attr('id', 'right-safety'));
 
-
+                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Rating: </span>' + '<span class="safety-desc">' + overallRating + '</span></div>');
+                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Front Crash Rating: </span>' + '<span class="safety-desc">' + overallFrontCrashRating + '</span></div>');
+                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashDriversideRating + '</span></div>');
+                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Passenger Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashPassengersideRating + '</span></div>');
+                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Side Crash Rating: </span>' + '<span class="safety-desc">' + overallSideCrashRating + '</span></div>');
+                $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashDriversideRating + '</span></div>');
+                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Passenger Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashPassengersideRating + '</span></div>');
+                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Rollover Rating: </span>' + '<span class="safety-desc">' + rolloverRating + '</span></div>');
+                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Side Pole Crash Rating: </span>' + '<span class="safety-desc">' + sidePoleCrashRating + '</span></div>');
+                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Electronic Stability Control: </span>' + '<span class="safety-desc">' + nhtsaElectronicStabilityControl + '</span></div>');
+                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Forward Collision Warning: </span>' + '<span class="safety-desc">' + nhtsaForwardCollisionWarning + '</span></div>');
+                $('#right-safety').append('<div class="rating-row"><span class="safety-title">Lane Departure Warning: </span>' + '<span class="safety-desc">' + nhtsaLaneDepartureWarning + '</span></div>');
             }
         },
 
@@ -79,7 +99,7 @@ function getSafety() {
     });
 }
 
-
+//PARSE RECALL DATA & DISPLAY
 function getRecall() {
     var year = $('#car-years').val();
     var make = $('#car-makes').val();
@@ -122,7 +142,7 @@ function getRecall() {
     });
 }
 
-
+//MOMENTARY LOADING MESSAGE UNTIL DATA IS FETCHED
 function loading() {
     $("#safety-div").empty();
     $("#recall-div").empty();
