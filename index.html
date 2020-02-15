@@ -32,15 +32,15 @@
     <div class="tabed-section section">
         <div class="tabs is-medium">
             <ul>
-                <li class=""><a>Saftey Data</a></li>
-                <li class="is-active"><a>Recalls</a></li>
-                <li class=""><a>TSB's</a></li>
+                <li class="tab is-active" id="safety"><a>Crash Ratings</a></li>
+                <li class="tab" id="recall"><a>Recalls</a></li>
+                <li class="tab" id="tsb"><a>TSB's</a></li>
             </ul>
         </div>
-    
-        <div id="safety-div"></div>
-        <div id="recall-div"></div>
-        <div id="tsb-div">TSB INFORMATION</div>
+
+        <div id="safety-div" class="tab-content"></div>
+        <div id="recall-div" class="tab-content hide"></div>
+        <div id="tsb-div" class="tab-content hide"></div>
     </div>
 </main>
 
@@ -65,7 +65,6 @@
     </tr>
 
 </table> -->
-
 
 <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
 <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
