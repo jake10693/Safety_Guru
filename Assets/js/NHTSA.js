@@ -14,10 +14,11 @@ $(".tab").on("click", function () {
 
 $("#search-btn").on("click", function (event) {
     event.preventDefault();
-    getPhoto();
     getVehinfo();
     getRecall();
+    getPhoto();
 });
+
 
 //PARSE DATA & RETURN VEHICLE ID
 function getVehinfo() {
