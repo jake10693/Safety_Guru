@@ -30,6 +30,7 @@ function getVehinfo() {
     $.ajax({
         url: idLink,
         type: 'GET',
+        beforeSend: loading(),
 
         success: function (response) {
 
@@ -38,7 +39,7 @@ function getVehinfo() {
             var resultCount = response.Results.length;
 
             if (resultCount === 0) {
-                $('#safety-div').append($('<h5>').text('No safety data available for this vehicle'));
+                $('#safety-div').append($('<h5>').text('No crash data available for this vehicle'));
             } else {
                 const vehId = response.Results[0].VehicleId;
                 getSafety(vehId);
@@ -53,13 +54,12 @@ function getSafety(value) {
     var make = $('#car-makes').val();
     var model = $('#car-models').val();
 
-
     const safetyQuery = "https://cors-anywhere.herokuapp.com/https://one.nhtsa.gov/webapi/api/SafetyRatings/VehicleId/" + value + "?format=json";
 
     $.ajax({
         url: safetyQuery,
         type: 'GET',
-        beforeSend: loading(),
+        
 
         success: function (response) {
 
@@ -78,18 +78,17 @@ function getSafety(value) {
             const nhtsaForwardCollisionWarning = response.Results[0].NHTSAElectronicStabilityControl;
             const nhtsaLaneDepartureWarning = response.Results[0].NHTSALaneDepartureWarning;
 
-            $('#safety-div').append($('<div>').attr('id', 'left-safety'));
-            $('#safety-div').append($('<div>').attr('id', 'right-safety'));
+            $('#safety-div').addClass('columns');
 
-            console.log(overallRating)
+            $('#safety-div').append($('<div>').addClass('column is-half').attr('id', 'left-safety'));
+            $('#safety-div').append($('<div>').addClass('column is-half').attr('id', 'right-safety'));
 
             $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Rating: </span>' + '<span class="safety-desc">' + overallRating + '</span></div>');
             $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Front Crash Rating: </span>' + '<span class="safety-desc">' + overallFrontCrashRating + '</span></div>');
             $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashDriversideRating + '</span></div>');
             $('#left-safety').append('<div class="rating-row"><span class="safety-title">Passenger Front Crash Rating: </span>' + '<span class="safety-desc">' + frontCrashPassengersideRating + '</span></div>');
             $('#left-safety').append('<div class="rating-row"><span class="safety-title">Overall Side Crash Rating: </span>' + '<span class="safety-desc">' + overallSideCrashRating + '</span></div>');
-            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Drivers Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashDriversideRating + '</span></div>');
-            $('#right-safety').append('<div class="rating-row"><span class="safety-title">Passenger Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashPassengersideRating + '</span></div>');
+            $('#left-safety').append('<div class="rating-row"><span class="safety-title">Passenger Side Crash Rating: </span>' + '<span class="safety-desc">' + sideCrashPassengersideRating + '</span></div>');
             $('#right-safety').append('<div class="rating-row"><span class="safety-title">Rollover Rating: </span>' + '<span class="safety-desc">' + rolloverRating + '</span></div>');
             $('#right-safety').append('<div class="rating-row"><span class="safety-title">Side Pole Crash Rating: </span>' + '<span class="safety-desc">' + sidePoleCrashRating + '</span></div>');
             $('#right-safety').append('<div class="rating-row"><span class="safety-title">Electronic Stability Control: </span>' + '<span class="safety-desc">' + nhtsaElectronicStabilityControl + '</span></div>');
@@ -130,9 +129,9 @@ function getRecall() {
                     const title = response.Results[i].Component;
                     const summary = response.Results[i].Summary;
                     const recallNum = response.Results[i].NHTSACampaignNumber;
-                    const t = $('<h5>').text(title)
-                    const s = $('<p>').text(summary)
-                    const r = $('<p>').text('NHTSA CAMPAIGN NUMBER: ' + recallNum)
+                    const t = $('<h5>').text(title).addClass('recall-title')
+                    const s = $('<p>').text(summary).addClass('recall-summary')
+                    const r = $('<p>').text('NHTSA CAMPAIGN NUMBER: ' + recallNum).addClass('recall-number')
                     const b = $('<br>')
                     $('#recall-div').append(t);
                     $('#recall-div').append(s);

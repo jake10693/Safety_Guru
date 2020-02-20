@@ -1,159 +1,198 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/hero.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+    <link rel="stylesheet" href="./assets/css/main.css">
     <title>Safety Guru</title>
 </head>
 
-<section class="hero is-primary">
-    <div class="hero-body">
-        <div class="container">
-            <h1 id="head" class="title">Safety Guru</h1>
-            <h2 id="head2" class="subtitle">Where you can find affordable and safe vehicles for you and your family!
-            </h2>
+<body>
+    <section class="hero is-info is-fullheight is-bold">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="index.html">Safety Guru</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    Saving lives one family at a time
+                </h1>
+                <br>
+                <img src="./assets/images/hero_img.png" alt="NHTSA logo">
+                <br>
+                <p><a href="#search-div"><i class="fas fa-chevron-down"></i></a></p>
+            </div>
+        </div>
+    </section>
+    <div class="box cta">
+        <p class="has-text-centered">
+            <span class="tag is-primary">$</span> Price range calculator comming soon!
+        </p>
+    </div>
+    <section class="container">
+        <div class="columns">
+            <div class="column is-4">
+                <div class="card is-shady crd">
+                    <div class="card-image has-text-centered">
+                        <img src="./assets/images/nhtsa_img.png" alt="NHTSA logo">
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <p>The National Highway Traffic Safety Administration (NHTSA) is a federal agency of the
+                                United States government tasked with upholding regulatory safety standards in automobile
+                                manufacturing and the highway transportation system. It is a part of the U.S. Department
+                                of Transportation.</p>
+                            <p><a target="_blank" href="https://www.nhtsa.gov/">Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="card is-shady crd">
+                    <div class="card-image has-text-centered">
+                        <img src="./assets/images/NCAP.png" alt="NCAP logo">
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <p>A New Car Assessment Program is a government car safety program tasked with evaluating
+                                new automobile designs for performance against various safety threats.</p>
+                            <p><a target="_blank" href="https://www.euroncap.com/en">Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="card is-shady crd">
+                    <div class="card-image has-text-centered">
+                        <img src="./assets/images/carQuery_img.png" alt="Car Query API logo">
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <p>CarQuery API is an easy to use JSON based API for retrieving detailed car and truck
+                                information, including year, make, model, trim, and specifications</p>
+                            <p><a target="_blank" href="https://www.carqueryapi.com/">Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <article class="container has-text-centered srch-box-1">
+        <div class="columns is-shady">
+            <div class="column is-12">
+                <div id="search-div">
+                    <div class="card-content">
+                        <div class="content">
+                            <div class="container">
+                                <h1 class="title">Vehicle Search</h1>
+                                <p class="subtitle">
+                                    Search by Year, Make & Model
+                                </p>
+                                <div class="select">
+                                    <select name="car-years" id="car-years"></select>
+                                </div>
+                                <div class="select">
+                                    <select name="car-makes" id="car-makes"></select>
+                                </div>
+                                <div class="select">
+                                    <select name="car-models" id="car-models"></select>
+                                </div>
+                                <div class="select">
+                                    <select name="car-model-trims" id="car-model-trims"></select>
+                                </div>
+                                <button id="search-btn" class="button is-info">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <div class="container">
+        <div class="tile is-parent is-full is-shady srch-box-2">
+            <div class="tabed-section container">
+                <div class="tabs is-medium">
+                    <ul>
+                        <li class="tab is-active" id="details"><a>DETAILS</a></li>
+                        <li class="tab" id="safety"><a>CRASH RATINGS</a></li>
+                        <li class="tab" id="recall"><a>RECALLS</a></li>
+                        <li class="tab hide" id="tsb"><a>TSB</a></li>
+                    </ul>
+                </div>
+                <div id="details-div" class="tab-content container columns">
+                    <div class="column is-half" id="veh-img">
+
+                    </div>
+                    <div class="column">
+                        <div id="car-model-data"></div>
+                    </div>
+                </div>
+                <div id="safety-div" class="tab-content container hide"></div>
+                <div id="recall-div" class="tab-content container hide"></div>
+                <div id="tsb-div" class="tab-content container hide"></div>
+            </div>
         </div>
     </div>
-</section>
-
-<main>
-    
-        <div class="columns">
-
-        <div class="column-">
-            <div class="selection-menu section">
-             <select name="car-years" id="car-years"></select>
-             <select name="car-makes" id="car-makes"></select>
-             <select name="car-models" id="car-models"></select>
-             <button id="search-btn">Search</button>
-            </div>
-        </div>
-
-    <!-- <table>
-        <tr>
-            <td valign="top">
-                <div id="make-list" />
-            </td>
-            <td valign="top">
-                <div id="model-list" />
-            </td>
-            <td valign="top">
-                <div id="trim-list" />
-            </td>
-        </tr>
-    
-    </table> -->
-
-    <!-- <div class="tabed-section section">
-        <div class="tabs is-medium">
-            <ul>
-                <li class=""><a>Saftey Data</a></li>
-                <li class="is-active"><a>Recalls</a></li>
-                <li class=""><a>TSB's</a></li>
-            </ul>
-        </div>
-    
-        <div id="safety-div"></div>
-        <div id="recall-div"></div>
-        <div id="tsb-div">TSB INFORMATION</div>
-    </div> -->
-    <div class="column">
-    <div class="container is-widescreen">
-        <div class="tile is-ancestor">
-            <div class="tile is-vertical is-8">
-              <div class="tile">
-                <div class="tile is-parent is-vertical">
-                  <article class="tile is-child notification is-primary" id="block1">
-                    <p class="title">Dealer/New</p>
-                    <p class="subtitle">Average expected cost for a new model</p>
-                    <p></p>
-                  </article>
-                  <article class="tile is-child notification is-warning" id="block2">
-                    <p class="title">Dealer/Used</p>
-                    <p class="subtitle">Average expected cost for a used model</p>
-                    <p></p>
-                  </article>
+    <footer class="footer">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-3 is-offset-2">
+                    <h2><strong>Category</strong></h2>
+                    <ul>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                    </ul>
                 </div>
-                <div class="tile is-parent">
-                  <article class="tile is-child notification is-info" id="block3">
-                    <p class="title">Middle tile</p>
-                    <p class="subtitle">With an image</p>
-                    <figure class="image is-4by3">
-                      <img src="https://bulma.io/images/placeholders/640x480.png">
-                    </figure>
-                  </article>
+                <div class="column is-3">
+                    <h2><strong>Category</strong></h2>
+                    <ul>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                    </ul>
                 </div>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child notification is-danger" id="block4">
-                  <p class="title">Private Party</p>
-                  <p class="subtitle">Average expected cost if purchased from private party</p>
-                  <p></p>
-                  <div class="content">
-                    <!-- Content -->
-                    <div class="tabed-section section">
-                        <div class="tabs is-medium">
-                            <ul>
-                                <li class=""><a>Saftey Data</a></li>
-                                <li class="is-active"><a>Recalls</a></li>
-                                <li class=""><a>TSB's</a></li>
-                            </ul>
-                        </div>
-                    
-                        <div id="safety-div"></div>
-                        <div id="recall-div"></div>
-                        <div id="tsb-div">TSB INFORMATION</div>
-                    </div>
-                  </div>
-                </article>
-              </div>
+                <div class="column is-4">
+                    <h2><strong>Category</strong></h2>
+                    <ul>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                    </ul>
+                </div>
             </div>
-           
-                
-              </article>
-            </div>
-          </div>
-        
         </div>
-        </div>
-        </div>
-</main>
+    </footer>
 
-<!-- <h2 id="car-searched"></h2>
-
-
-
-<br>
-<input id="search-btn" type="button" value="Show Data" />
-<div id="car-model-data"></div>
-<table>
-    <tr>
-        <td valign="top">
-            <div id="make-list" />
-        </td>
-        <td valign="top">
-            <div id="model-list" />
-        </td>
-        <td valign="top">
-            <div id="trim-list" />
-        </td>
-    </tr>
-
-</table> -->
-
-
-<script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
-<script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="./Assets/js/kbb.js"></script>
-<script src="./Assets/js/NHTSA.js"></script>
-<script src="./Assets/js/cq.js"></script>
-
+    
+    <script src="http://www.carqueryapi.com/js/jquery.min.js"></script>
+    <script src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="./assets/js/NHTSA.js"></script>
+    <script src="./assets/js/carquery.js"></script>
+    <script src="./assets/js/img.js"></script>
 </body>
 
 </html>

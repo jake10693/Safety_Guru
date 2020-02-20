@@ -3,14 +3,15 @@ function getPhoto() {
     var make = $('#car-makes').val();
     var model = $('#car-models').val();
 
-    const xmlLink = "http://www.carimagery.com/api.asmx/GetImageUrl?searchTerm=" + year + "+" + make + "+" + model
+    const xmlLink = "https://www.carimagery.com/api.asmx/GetImageUrl?searchTerm=" + year + "+" + make + "+" + model
 
     $.ajax({
         url: xmlLink,
         dataType: 'xml',
         success: function(data){
-            imgLink = $(data).text()
-            $('.selection-menu').append($('<img>').attr('src', imgLink))
+            imgLink = $(data).text();
+            $("#veh-img").empty();
+            $('#veh-img').append($('<img>').attr('src', imgLink));
         },
         error: function(data){
             console.log('Error loading XML data');
