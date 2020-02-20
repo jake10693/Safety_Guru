@@ -10,7 +10,7 @@ function getPhoto() {
         dataType: 'xml',
         success: function(data){
             imgLink = $(data).text()
-            $('.selection-menu').append($('<img>').attr('src', imgLink))
+            $('#img-div').append($('<img>').attr('src', imgLink))
         },
         error: function(data){
             console.log('Error loading XML data');
