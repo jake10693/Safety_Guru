@@ -3,7 +3,7 @@ function getPhoto() {
     var make = $('#car-makes').val();
     var model = $('#car-models').val();
 
-    const xmlLink = "http://www.carimagery.com/api.asmx/GetImageUrl?searchTerm=" + year + "+" + make + "+" + model
+    const xmlLink = "https://www.carimagery.com/api.asmx/GetImageUrl?searchTerm=" + year + "+" + make + "+" + model
 
     $.ajax({
         url: xmlLink,
