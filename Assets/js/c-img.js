@@ -9,6 +9,7 @@ function getPhoto() {
         url: xmlLink,
         dataType: 'xml',
         success: function(data){
+            $("#img-div").empty();
             imgLink = $(data).text()
             $('#img-div').append($('<img>').attr('src', imgLink))
         },
